@@ -1,0 +1,14 @@
+[user]
+	name = zhangb
+	email = xiaobo1128@gmail.com
+[pull]
+	rebase = true
+[http]
+	postBuffer = 524288000
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout
+[push]
+	default = simple
+[core]
+	autocrlf = input
