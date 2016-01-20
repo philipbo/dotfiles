@@ -1,0 +1,445 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/Vimfiles/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+"
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+" theme
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'fatih/molokai'
+
+" auto complete
+" 代码自动补全
+Plugin 'Valloric/YouCompleteMe'
+
+" 括号等自动完成
+Plugin 'Townk/vim-autoclose'
+" HTML
+Plugin 'mattn/emmet-vim'
+" 自动补全html/xml标签
+Plugin 'docunext/closetag.vim'
+
+" 文件搜索
+" Plugin 'kien/ctrlp.vim'
+" unite
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
+Plugin 'rking/ag.vim'
+Plugin 'dyng/ctrlsf.vim'
+
+" 注释
+Plugin 'scrooloose/nerdcommenter'
+" 对齐
+Plugin 'godlygeek/tabular'
+
+" 静态语法及风格检查，支持多种语言
+Plugin 'scrooloose/syntastic'
+
+" quick movement
+" easymotion
+"更高效的移动 [,, + w/fx/h/j/k/l]
+Plugin 'Lokaltog/vim-easymotion'
+
+" 更高效的行内移动, f/F/t/T, 才触发
+" quickscope
+Plugin 'unblevable/quick-scope'
+
+" quick selection and edit
+" expandregion
+" 选中区块
+Plugin 'terryma/vim-expand-region'
+" 多光标选中编辑
+" multiplecursors
+Plugin 'terryma/vim-multiple-cursors'
+
+Plugin 'vim-scripts/matchit.zip'
+
+" nav
+" nerdtree nerdtreetabs
+Plugin 'scrooloose/nerdtree' | Plugin 'jistr/vim-nerdtree-tabs'
+" ctrlspace
+Plugin 'vim-ctrlspace/vim-ctrlspace'
+
+" tagbar
+Plugin 'majutsushi/tagbar'
+
+Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-surround'
+
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" go
+Plugin 'fatih/vim-go'
+Plugin 'moll/vim-node'
+" react
+Plugin 'mxw/vim-jsx'
+Plugin 'justinj/vim-react-snippets'
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+" vimproc 必须要，可能还需要执行 make， 请阅读官方说明:
+" https://github.com/Shougo/vimproc.vim
+Plugin 'Shougo/vimproc.vim'
+Plugin 'chemzqm/vim-easygit'
+Plugin 'chemzqm/unite-git-log'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" nerdcommenter {{{
+    let g:NERDSpaceDelims=1
+" }}}
+
+
+" closetag {{{
+    let g:closetag_html_style=1
+" }}}
+
+
+" ################### 自动补全 ###################
+
+" YouCompleteMe {{{
+    "youcompleteme  默认tab  s-tab 和自动补全冲突
+    "auto close preview window"
+    let g:ycm_autoclose_preview_window_after_completion = 1 
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+    " 直接触发自动补全 insert模式下
+    let g:ycm_key_invoke_completion = '<C-Space>'
+
+    " 跳转到定义处, 分屏打开
+    let g:ycm_goto_buffer_command = 'horizontal-split'
+    " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+    " 黑名单,不启用
+    let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'gitcommit' : 1,
+        \}
+" }}}
+
+
+" ultisnips {{{
+    let g:UltiSnipsExpandTrigger       = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    "map <leader>us :UltiSnipsEdit<CR>
+    "let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+" }}}
+
+" ################### 快速移动 ###################
+
+" easymotion {{{
+    let g:EasyMotion_smartcase = 1
+    "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+    map <Leader><leader>h <Plug>(easymotion-linebackward)
+    map <Leader><Leader>j <Plug>(easymotion-j)
+    map <Leader><Leader>k <Plug>(easymotion-k)
+    map <Leader><leader>l <Plug>(easymotion-lineforward)
+    " 重复上一次操作, 类似repeat插件, 很强大
+    map <Leader><leader>. <Plug>(easymotion-repeat)
+" }}}
+
+
+" quickscope {{{
+    let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    " macvim/gvim会有问题, 暂时注解
+    " let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+    " let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+    " let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+    " let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+" }}}
+
+" ################### 快速选中 ###################
+
+" expandregion {{{
+    " map + <Plug>(expand_region_expand)
+    " map _ <Plug>(expand_region_shrink)
+    vmap v <Plug>(expand_region_expand)
+    vmap V <Plug>(expand_region_shrink)
+    " Extend the global default
+    call expand_region#custom_text_objects({
+      \ 'a]' :1,
+      \ 'ab' :1,
+      \ 'aB' :1,
+      \ 'ii' :0,
+      \ 'ai' :0,
+      \ })
+" }}}
+
+" multiplecursors {{{
+    let g:multi_cursor_use_default_mapping=0
+    " Default mapping
+    let g:multi_cursor_next_key='<C-m>'
+    let g:multi_cursor_prev_key='<C-p>'
+    let g:multi_cursor_skip_key='<C-x>'
+    let g:multi_cursor_quit_key='<Esc>'
+" }}}
+
+" ################### 功能相关 ###################
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" ctrlsf {{{
+    nmap \ <Plug>CtrlSFCwordPath<CR>
+    " let g:ctrlsf_position = 'below'
+    " let g:ctrlsf_winsize = '30%'
+    let g:ctrlsf_auto_close = 0
+    let g:ctrlsf_confirm_save = 0
+    " Note: cannot use <CR> or <C-m> for open
+    " Use : <sapce> or <tab>
+    let g:ctrlsf_mapping = {
+        \ "open"  : "<Space>",
+        \ "openb" : "O",
+        \ "tab"   : "t",
+        \ "tabb"  : "T",
+        \ "prevw" : "p",
+        \ "quit"  : "q",
+        \ "next"  : "<C-J>",
+        \ "prev"  : "<C-K>",
+        \ "pquit" : "q",
+        \ }
+" }}}
+
+" gitgutter {{{
+    " 同git diff,实时展示文件中修改的行
+    " 只是不喜欢除了行号多一列, 默认关闭,gs时打开
+    let g:gitgutter_map_keys = 0
+    let g:gitgutter_enabled = 0
+    let g:gitgutter_highlight_lines = 1
+" }}}
+
+" == unite ==
+" Start insert.
+" Unite {{{
+let g:unite_enable_short_source_names = 0
+
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#source('file,file/new,buffer,file_rec,file_mru,line,outline', 'matchers', 'matcher_fuzzy')
+
+let g:unite_source_history_yank_enable = 1
+" To track long mru history.
+"let g:unite_source_file_mru_long_limit = 3000
+"let g:unite_source_directory_mru_long_limit = 3000
+
+" Like ctrlp.vim settings.
+" let g:unite_enable_start_insert = 1
+" let g:unite_winheight = 10
+" let g:unite_split_rule = 'botright'
+
+let g:unite_prompt = '>>> '
+call unite#custom#profile('default', 'context', {
+    \   'start_insert': 1,
+    \   'winheight': 10,
+    \   'direction': 'botright',
+    \   'prompt_direction': 'top'
+    \ })
+
+autocmd FileType unite call s:unite_my_settings()
+    function! s:unite_my_settings()"{{{
+      " Overwrite settings.
+      nmap <buffer> <ESC>      <Plug>(unite_exit)
+      imap <buffer> jk      <Plug>(unite_insert_leave)
+      "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+
+      imap <buffer><expr> j unite#smart_map('j', '')
+      imap <buffer> <TAB>   <Plug>(unite_select_next_line)
+      imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+      imap <buffer> '     <Plug>(unite_quick_match_default_action)
+      nmap <buffer> '     <Plug>(unite_quick_match_default_action)
+      imap <buffer><expr> x
+              \ unite#smart_map('x', "\<Plug>(unite_quick_match_choose_action)")
+      nmap <buffer> x     <Plug>(unite_quick_match_choose_action)
+      nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+      imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+      imap <buffer> <C-y>     <Plug>(unite_narrowing_path)
+      nmap <buffer> <C-y>     <Plug>(unite_narrowing_path)
+      nmap <buffer> <C-j>     <Plug>(unite_toggle_auto_preview)
+      nmap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+      imap <buffer> <C-r>     <Plug>(unite_narrowing_input_history)
+      nnoremap <silent><buffer><expr> l
+              \ unite#smart_map('l', unite#do_action('default'))
+
+      let unite = unite#get_current_unite()
+      if unite.buffer_name =~# '^search'
+        nnoremap <silent><buffer><expr> r     unite#do_action('replace')
+      else
+        nnoremap <silent><buffer><expr> r     unite#do_action('rename')
+      endif
+
+      nnoremap <silent><buffer><expr> cd     unite#do_action('lcd')
+      nnoremap <buffer><expr> S      unite#mappings#set_current_filters(
+              \ empty(unite#mappings#get_current_filters()) ?
+              \ ['sorter_reverse'] : [])
+
+      " Runs "split" action by <C-s>.
+      imap <silent><buffer><expr> <C-s>     unite#do_action('split')
+      imap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
+    endfunction"}}}
+
+nnoremap <Leader>f :<C-u>Unite file<CR>
+nnoremap <Leader>b :<C-u>Unite buffer<CR>
+nnoremap <Leader>u :<C-u>Unite file_mru<CR>
+nnoremap <Leader>d :<C-u>Unite directory_mru<CR>
+
+"nnoremap <space>b :Unite -start-insert -buffer-name=buffer buffer -default-action=tabopen<cr>
+"map <A-p> :Unite bookmark file_mru<CR>
+"map <C-f> :Unite line<CR>
+"map <C-g> :Unite outline<CR>
+
+let g:unite_source_outline_indent_width = 4
+" }}}
+
+" ################### 显示增强 ###################
+
+" airline {{{
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    let g:airline_left_sep = '▶'
+    let g:airline_left_alt_sep = '❯'
+    let g:airline_right_sep = '◀'
+    let g:airline_right_alt_sep = '❮'
+    let g:airline_symbols.linenr = '¶'
+    let g:airline_symbols.branch = '⎇'
+    " 是否打开tabline
+    let g:airline#extensions#tabline#enabled = 1
+    " let g:airline_theme='molokai'
+" }}}
+
+" ################### 显示增强-主题 ###################"
+
+" solarized {{{
+    let g:solarized_termtrans=1
+    let g:solarized_contrast="normal"
+    let g:solarized_visibility="normal"
+    " let g:solarized_termcolors=256
+" }}}
+
+" molokai {{{
+    " monokai原始背景色
+    let g:molokai_original = 1
+    let g:rehash256 = 1
+" }}}
+
+" ################### 快速导航 ###################
+
+" nerdtree nerdtreetabs {{{
+    map <leader>n :NERDTreeToggle<CR>
+    let NERDTreeHighlightCursorline=1
+    let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+    "close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+    " s/v 分屏打开文件
+    let g:NERDTreeMapOpenSplit = 's'
+    let g:NERDTreeMapOpenVSplit = 'v'
+
+
+    " nerdtreetabs
+    map <Leader>n <plug>NERDTreeTabsToggle<CR>
+    " 关闭同步
+    let g:nerdtree_tabs_synchronize_view=0
+    let g:nerdtree_tabs_synchronize_focus=0
+    " 是否自动开启nerdtree
+    " thank to @ListenerRi, see https://github.com/wklken/k-vim/issues/165
+    let g:nerdtree_tabs_open_on_console_startup=0
+    let g:nerdtree_tabs_open_on_gui_startup=0
+" }}}
+
+" Vim Workspace Controller
+" ctrlspace {{{
+  "  let g:airline_exclude_preview = 1
+    hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
+    hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
+    hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
+    hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
+" }}}
+
+if has("gui_running")
+    " Settings for MacVim and Inconsolata font
+    let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+endif
+
+
+" 标签导航
+" tagbar {{{
+    nmap <F9> :TagbarToggle<CR>
+    let g:tagbar_autofocus = 1
+    " let g:tagbar_autoshowtag = 1
+    " let g:tagbar_show_visibility = 1
+    " for ruby
+    let g:tagbar_type_ruby = {
+        \ 'kinds' : [
+            \ 'm:modules',
+            \ 'c:classes',
+            \ 'd:describes',
+            \ 'C:contexts',
+            \ 'f:methods',
+            \ 'F:singleton methods'
+        \ ]
+    \ }
+
+" vimgo {{{
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_interfaces = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+
+    let g:go_fmt_fail_silently = 1
+    let g:go_fmt_command = "goimports"
+    let g:go_fmt_autosave = 0
+    " let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    "au FileType go nmap <leader>r <Plug>(go-run)
+    "au FileType go nmap <leader>b <Plug>(go-build)
+    "au FileType go nmap <leader>t <Plug>(go-test)
+    "au FileType go nmap <leader>c <Plug>(go-coverage)
+    au FileType go nmap <Leader>ds <Plug>(go-def-split)
+    au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+    "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+    au FileType go nmap <Leader>gd <Plug>(go-doc)
+    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+    au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+    "au FileType go nmap <Leader>s <Plug>(go-implements)
+    "au FileType go nmap <Leader>i <Plug>(go-info)
+    "au FileType go nmap <Leader>e <Plug>(go-rename)
+
+" }}}
+
+" markdown {{{
+    let g:vim_markdown_folding_disabled=1
+" }}}
+
+
+" javascript {{{
+    " pangloss/vim-javascript
+    let g:html_indent_inctags = "html,body,head,tbody"
+    let g:html_indent_script1 = "inc"
+    let g:html_indent_style1 = "inc"
+" }}}
+
+" json {{{
+    let g:vim_json_syntax_conceal = 0
+" }}}
+
+" css {{{
+" }}}
+
+" nginx {{{
+" }}}
