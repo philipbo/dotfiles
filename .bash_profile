@@ -14,6 +14,9 @@ fi
 if [ -f /usr/local/bin/brew ]; then
 	export HOMEBREW_GITHUB_API_TOKEN=ce609b578f97e6a1e97fb29c7bd613d17e64c681
 fi
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 export GOPATH=/Users/zbo/go
 export PATH=$PATH:$GOPATH/bin
 
