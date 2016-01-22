@@ -17,6 +17,8 @@ Plugin 'fatih/molokai'
 " auto complete
 " 代码自动补全
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " 括号等自动完成
 Plugin 'Townk/vim-autoclose'
@@ -74,9 +76,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-
 " go
 Plugin 'fatih/vim-go'
 Plugin 'moll/vim-node'
@@ -108,6 +107,32 @@ filetype plugin indent on    " required
     let g:closetag_html_style=1
 " }}}
 
+"let javascript_enable_domhtmlcss=1
+
+" syntastic {{{
+    let g:syntastic_error_symbol='>>'
+    let g:syntastic_warning_symbol='>'
+    "let g:syntastic_enable_highlighting=1
+    "let g:syntastic_auto_loc_list = 1
+    "let g:syntastic_check_on_open = 1
+    "let g:syntastic_check_on_wq = 0
+
+    let g:syntastic_enable_signs = 0
+
+
+    function! ToggleErrors()
+        let old_last_winnr = winnr('$')
+        lclose
+        if old_last_winnr == winnr('$')
+            " Nothing was closed, open syntastic_error location panel
+            Errors
+        endif
+    endfunction
+    nnoremap <Leader>s :call ToggleErrors()<cr>
+    " nnoremap <Leader>sn :lnext<cr>
+    " nnoremap <Leader>sp :lprevious<cr>
+
+" }}}
 
 " ################### 自动补全 ###################
 
@@ -120,7 +145,6 @@ filetype plugin indent on    " required
     let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
     " 直接触发自动补全 insert模式下
     let g:ycm_key_invoke_completion = '<C-Space>'
-
     " 跳转到定义处, 分屏打开
     let g:ycm_goto_buffer_command = 'horizontal-split'
     " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
@@ -462,6 +486,7 @@ endif
     let g:vim_markdown_folding_disabled=1
 " }}}
 
+let g:jsx_ext_required = 0
 
 " javascript {{{
     " pangloss/vim-javascript
