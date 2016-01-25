@@ -29,6 +29,8 @@ brew install python
 brew install sqlite
 brew install redis
 brew install vim --with-lua --with-cscope
+brew install rust
+brew install cargo-completion
 
 
 brew cleanup
