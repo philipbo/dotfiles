@@ -20,6 +20,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 
+" format code
+Plugin 'editorconfig/editorconfig-vim'
+
 " 括号等自动完成
 Plugin 'Townk/vim-autoclose'
 " HTML
