@@ -96,6 +96,8 @@ Plugin 'chemzqm/unite-git-log'
 
 Plugin 'rust-lang/rust.vim'
 
+Plugin 'klen/python-mode'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -124,6 +126,8 @@ filetype plugin indent on    " required
 
     let g:syntastic_enable_signs = 0
 
+    " let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
+    " let g:syntastic_python_pep8_args='--ignore=E501,E225,E124,E712'
 
     function! ToggleErrors()
         let old_last_winnr = winnr('$')
@@ -499,6 +503,11 @@ endif
     let g:rustfmt_autosave = 1
 " }}}
 
+" python {{{
+    let g:pymode_breakpoint_bind = '<leader>bp'
+    " let g:pymode_syntax = 1
+    " let g:pymode_lint = 0
+" }}
 
 " javascript {{{
     " pangloss/vim-javascript
