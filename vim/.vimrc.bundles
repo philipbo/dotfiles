@@ -504,6 +504,8 @@ endif
 " }}}
 
 " python {{{
+    "user  YouCompleteMe
+    let g:pymode_rope_completion = 0 
     let g:pymode_breakpoint_bind = '<leader>bp'
     " let g:pymode_syntax = 1
     " let g:pymode_lint = 0
