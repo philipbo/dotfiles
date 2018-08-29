@@ -1,33 +1,53 @@
 alias vi='vim'
 alias ll='ls -lG'
+alias la='ls -alG'
 alias ls='ls -G'
 alias grep='grep --color'
 alias egrep='egrep --color'
 alias fgrep='fgrep --color'
-alias cross='CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build'
 alias scpr="rsync -P --rsh=ssh"
+alias cross='CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build'
+alias hps='http_proxy=127.0.0.1:1087'
+alias hpss='https_proxy=127.0.0.1:1087'
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	. $(brew --prefix)/etc/bash_completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+    	. /usr/local/etc/bash_completion.d/git-prompt.sh
+
+	#git prompt
+	#source ~/.git-prompt.sh
+	GIT_PS1_SHOWCOLORHINTS=true
+	GIT_PS1_SHOWDIRTYSTATE=true
+	GIT_PS1_SHOWSTASHSTATE=true
+	GIT_PS1_SHOWUNTRACKEDFILES=true
+	#GIT_PS1_SHOWUPSTREAM="auto"
+
+	#export PS1='\h:\W \u$(__git_ps1)\$ '
+	#PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+
+	yellow=$'\[\e[0;33m\]'
+	normal=$'\[\e[m\]'
+
+	PS1="\h:\W \u$yellow\$(__git_ps1)$normal\$ "
 fi
 
 if [ -f /usr/local/bin/brew ]; then
-	export HOMEBREW_GITHUB_API_TOKEN=ce609b578f97e6a1e97fb29c7bd613d17e64c681
+    export HOMEBREW_GITHUB_API_TOKEN=9752d2c0dda659877f94102521176fceab175007
 fi
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-export GOPATH=/Users/zbo/go
+export GOPATH=$Home/go
 export PATH=$PATH:$GOPATH/bin
-
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin
-#export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-#export PYENV_ROOT=/usr/local/var/pyenv
+export PATH=$PATH:/usr/local/sbin
 
-export PYENV_ROOT=/usr/local/var/pyenv
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+flamegraphroot=/Users/zhangbo/go/src/github.com/brendangregg/FlameGraph
+export PATH=$PATH:$flamegraphroot
 
+
+# autojump.sh config
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
