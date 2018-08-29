@@ -38,7 +38,7 @@ fi
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-export GOPATH=$Home/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOROOT/bin
