@@ -3,33 +3,20 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-"Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim',{ 'do': { -> fzf#install() } }
 Plug 'rking/ag.vim'
-Plug 'dyng/ctrlsf.vim'
+"Plug 'dyng/ctrlsf.vim'
+Plug 'preservim/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'majutsushi/tagbar'
-"Plug 'preservim/tagbar'
 
 " 可以在 vim 中使用 tab 补全
 Plug 'vim-scripts/SuperTab'
 
-Plug 'itchyny/lightline.vim'
-" Plug 'mgee/lightline-bufferline'
-
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-"Plug 'roxma/vim-hug-neovim-rpc'
-" NOTE: you need to install completion sources to get completions. Check
-" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-"Plug 'ncm2/ncm2-go'
+Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'Townk/vim-autoclose'
@@ -38,6 +25,7 @@ Plug 'terryma/vim-multiple-cursors'
 "   Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
@@ -50,41 +38,120 @@ Plug 'ycm-core/YouCompleteMe'
 
 " theme
 Plug 'morhetz/gruvbox'
+"Plug 'itchyny/lightline.vim'
+"Plug 'mgee/lightline-bufferline'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Search results counter
+Plug 'vim-scripts/IndexedSearch'
+" Surround
+Plug 'tpope/vim-surround'
+" Indent text object
+Plug 'michaeljsmith/vim-indent-object'
+" Indentation based movements
+Plug 'jeetsukumaran/vim-indentwise'
+" Better language packs
+"Plug 'sheerun/vim-polyglot'
+" Window chooser
+Plug 't9md/vim-choosewin'
+" Highlight matching html tags
+"Plug 'valloric/MatchTagAlways'
+" Generate html in a simple way
+"Plug 'mattn/emmet-vim'
+" Nice icons in the file explorer and file type status line.
+Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
 
 set noshowmode
 
-" enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" IMPORTANTE: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-let g:loaded_gentags#gtags = 1
-
-" let g:deoplete#enable_at_startup = 1
 
 " nerdtree 配置
 " 自动启用
 " autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " map <C-n> :NERDTreeToggle<CR>
-map <F1> :NERDTreeToggle<CR>
-map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
+"map <F1> :NERDTreeToggle<CR>
+"map <leader>e :NERDTreeFind<CR>
+"nmap <leader>nt :NERDTreeFind<CR>
+" toggle nerdtree display
+map <F3> :NERDTreeToggle<CR>
+" open nerdtree with the current file selected
+nmap ,t :NERDTreeFind<CR>
+" don;t show these file types
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+
+" Enable folder icons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
+" Fix directory colors
+highlight! link NERDTreeFlags NERDTreeDir
+
+" Remove expandable arrow
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+let NERDTreeDirArrowExpandable = "\u00a0"
+let NERDTreeDirArrowCollapsible = "\u00a0"
+let NERDTreeNodeDelimiter = "\x07"
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 
 " fzf 配置
 "nnoremap <silent> <C-p> :Files<CR>
 "nnoremap <silent> <C-b> :Buffers<CR>
-nmap <C-p> :Files<CR>
-nmap <C-e> :Buffers<CR>
+"nmap <C-p> :Files<CR>
+"nmap <C-e> :Buffers<CR>
 "nnoremap <silent> <Leader>f :Files<CR>
 "nnoremap <silent> <Leader>b :Buffers<CR>
 
-nmap <F8> :TagbarToggle<CR>
+" file finder mapping
+nmap ,e :Files<CR>
+nmap ,b :Buffers<CR>
+" tags (symbols) in current file finder mapping
+nmap ,g :BTag<CR>
+" the same, but with the word under the cursor pre filled
+nmap ,wg :execute ":BTag " . expand('<cword>')<CR>
+" tags (symbols) in all files finder mapping
+nmap ,G :Tags<CR>
+" the same, but with the word under the cursor pre filled
+nmap ,wG :execute ":Tags " . expand('<cword>')<CR>
+" general code finder in current file mapping
+nmap ,f :BLines<CR>
+" the same, but with the word under the cursor pre filled
+nmap ,wf :execute ":BLines " . expand('<cword>')<CR>
+" general code finder in all files mapping
+nmap ,F :Lines<CR>
+" the same, but with the word under the cursor pre filled
+nmap ,wF :execute ":Lines " . expand('<cword>')<CR>
+" commands finder mapping
+nmap ,c :Commands<CR>
+
+
+" toggle tagbar display
+map <F4> :TagbarToggle<CR>
+" autofocus on tagbar open
+let g:tagbar_autofocus = 1
+
+"nmap <F8> :TagbarToggle<CR>
 
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
@@ -119,6 +186,8 @@ let g:tagbar_type_go = {
 let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+set completeopt-=preview
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -166,8 +235,51 @@ let g:tagbar_type_markdown = {
     \ 'l4subsection' : 'T',
   \ },
 \ }
+
+nmap <C-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle
+
 " markdown end
+" go start
+"
+let g:go_fmt_command = "goimports"
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR
+"autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+let g:go_auto_type_info = 1
+set updatetime=100
+let g:go_auto_sameids = 1
+
+" go end
+
+" mapping
+nmap  -  <Plug>(choosewin)
+" show big letters
+let g:choosewin_overlay_enable = 1
+
+" Airline ------------------------------
+
+let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline#extensions#whitespace#enabled = 0
 
 colorscheme gruvbox
 "set background=dark
-" set t_Co=256
+"set t_Co=256
+set autowrite

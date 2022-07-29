@@ -1,6 +1,6 @@
 " 修改leader键
-let mapleader = ';'
-let g:mapleader = ';'
+let mapleader = ','
+let g:mapleader = ','
 " jj 替换 Esc
 inoremap jj <Esc>
 " 开启语法高亮
@@ -31,9 +31,9 @@ set showcmd
 set showmode
 
 " 显示行号
-" set number
+ set number
 " 取消换行
-set nowrap
+"set nowrap
 
 " 回车不跟随上行注释
 set fo-=r
@@ -50,7 +50,8 @@ set smartcase
 
 set backspace=eol,start,indent
 
-set laststatus=2
+"set laststatus=2
+set ls=2
 
 " tab相关变更
 " 设置Tab键的宽度        [等同的空格个数]
@@ -91,6 +92,15 @@ set helplang=cn
 vnoremap < <gv
 vnoremap > >gv
 
+" clear search results
+nnoremap <silent> // :noh<CR>
+
+" tab navigation mappings
+map tt :tabnew
+map <M-Right> :tabn<CR>
+imap <M-Right> <ESC>:tabn<CR>
+map <M-Left> :tabp<CR>
+imap <M-Left> <ESC>:tabp<CR>
 
 " install bundles
 if filereadable(expand("~/.vimrc.bundles"))
