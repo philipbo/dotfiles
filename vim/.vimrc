@@ -1,6 +1,6 @@
 " 修改leader键
-let mapleader = ','
-let g:mapleader = ','
+let mapleader = ';'
+let g:mapleader = ';'
 " jj 替换 Esc
 inoremap jj <Esc>
 " 开启语法高亮
@@ -31,9 +31,12 @@ set showcmd
 set showmode
 
 " 显示行号
-set number
+" set number
 " 取消换行
 set nowrap
+
+" 回车不跟随上行注释
+set fo-=r
 
 " 设置文内智能搜索提示
 " 高亮search命中的文本

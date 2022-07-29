@@ -43,13 +43,16 @@ brew install mercurial
 brew install ctags
 brew install cscope
 brew install lua
-brew install go --with-cc-common
+brew install go
 brew install golangci-lint
 brew install node
 brew install python
+# brew install kamilturek/python2/python@2
 brew install sqlite
 brew install redis
 brew install vim --with-lua --with-cscope
+brew install protobuf
+brew install protoc-gen-go
 # brew install rust
 # brew install cargo-completion
 # brew install rustup-init

@@ -73,8 +73,10 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 plugins=(
     git
+    git-flow-avh
     golang
     vi-mode
     colored-man-pages
@@ -82,9 +84,10 @@ plugins=(
     web-search
     encode64
     urltools
-    copydir
+    copypath
     zsh-interactive-cd
-    docker docker-compose
+    docker 
+    docker-compose
 #    pyenv
     fd
 #    kubectl
@@ -92,12 +95,6 @@ plugins=(
 #    fzf
 )
 
-#if type brew &>/dev/null; then
-#  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-#
-#  autoload -Uz compinit
-#  compinit
-#fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -111,7 +108,7 @@ source /usr/local/share/z.lua/z.lua.plugin.zsh
 
 #if type brew &>/dev/null; then
 #  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
+#
 #  autoload -Uz compinit
 #  compinit
 #fi
@@ -121,7 +118,7 @@ source /usr/local/share/z.lua/z.lua.plugin.zsh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -151,4 +148,8 @@ source ~/.fzf.zsh
 source ~/.fzf.env
 
 
-ZSH_AUTOSUGGEST_MANUAL_REBIND=false
+#ZSH_AUTOSUGGEST_MANUAL_REBIND=false
+#ZSH_DISABLE_COMPFIX=true
+# eval "$(pyenv init -)"
+#
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
