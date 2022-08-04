@@ -50,8 +50,7 @@ set smartcase
 
 set backspace=eol,start,indent
 
-"set laststatus=2
-set ls=2
+set laststatus=2
 
 " tab相关变更
 " 设置Tab键的宽度        [等同的空格个数]
@@ -66,6 +65,9 @@ set smarttab
 set expandtab
 " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
+
+" vim yy to clipboard
+set clipboard=unnamed
 
 " 分屏窗口移动, Smart way to move between windows
 map <C-j> <C-W>j

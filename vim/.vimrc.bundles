@@ -10,12 +10,12 @@ Plug 'rking/ag.vim'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'preservim/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
-
-
 " 可以在 vim 中使用 tab 补全
 Plug 'vim-scripts/SuperTab'
 
+" go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Switch between single-line and multiline forms of code
 Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'scrooloose/nerdcommenter'
@@ -68,6 +68,8 @@ call plug#end()
 
 set noshowmode
 
+map <leader>u :CtrlPMRU<CR>
+
 
 " nerdtree 配置
 " 自动启用
@@ -82,7 +84,7 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
-nmap ,t :NERDTreeFind<CR>
+nmap ,o :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
@@ -151,7 +153,6 @@ map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
 let g:tagbar_autofocus = 1
 
-"nmap <F8> :TagbarToggle<CR>
 
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
@@ -236,9 +237,9 @@ let g:tagbar_type_markdown = {
   \ },
 \ }
 
-nmap <C-s> <Plug>MarkdownPreview
-nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+"nmap <C-s> <Plug>MarkdownPreview
+"nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-s> <Plug>MarkdownPreviewToggle
 
 " markdown end
 " go start
@@ -276,8 +277,11 @@ let g:choosewin_overlay_enable = 1
 
 " Airline ------------------------------
 
+"let g:airline_theme = 'bubblegum'
 let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#whitespace#enabled = 0
+
+set ttimeoutlen=0
 
 colorscheme gruvbox
 "set background=dark
