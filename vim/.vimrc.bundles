@@ -10,16 +10,20 @@ Plug 'rking/ag.vim'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'preservim/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
-" 可以在 vim 中使用 tab 补全
-Plug 'vim-scripts/SuperTab'
 
+" Vim plugin, insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
+
+" 可以在 vim 中使用 tab 补全
+"Plug 'vim-scripts/SuperTab'
+Plug 'ervandew/supertab'
 " go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Switch between single-line and multiline forms of code
 Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'scrooloose/nerdcommenter'
-Plug 'Townk/vim-autoclose'
+"Plug 'Townk/vim-autoclose'
 Plug 'terryma/vim-multiple-cursors'
 
 "   Git
@@ -184,16 +188,21 @@ let g:tagbar_type_go = {
 
 
 " make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 set completeopt-=preview
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
+
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
