@@ -9,7 +9,6 @@ Plug 'junegunn/fzf.vim',{ 'do': { -> fzf#install() } }
 Plug 'rking/ag.vim'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'preservim/tagbar'
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
@@ -17,10 +16,15 @@ Plug 'jiangmiao/auto-pairs'
 " 可以在 vim 中使用 tab 补全
 "Plug 'vim-scripts/SuperTab'
 Plug 'ervandew/supertab'
-" go
+
+" Go idea start
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Switch between single-line and multiline forms of code
 Plug 'AndrewRadev/splitjoin.vim'
+" Alternate Files quickly (.c --> .h etc)
+Plug 'vim-scripts/a.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+" Go idea end
 
 Plug 'scrooloose/nerdcommenter'
 "Plug 'Townk/vim-autoclose'
@@ -275,7 +279,15 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 autocmd FileType go nmap <Leader>i <Plug>(go-info)
 let g:go_auto_type_info = 1
 set updatetime=100
-let g:go_auto_sameids = 1
+" Identifier highlighting
+"let g:go_auto_sameids = 1
+"autocmd FileType go nmap <leader>// :GoSameIdsAutoToggle<CR>
+
+
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
 " go end
 
