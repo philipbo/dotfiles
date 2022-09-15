@@ -10,6 +10,8 @@ Plug 'rking/ag.vim'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'preservim/tagbar'
 
+Plug 'voldikss/vim-translator'
+
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
 
@@ -196,16 +198,18 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 set completeopt-=preview
 
 " better key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger = "<tab>"
-"let g:UltiSnipsJumpForwardTrigger = "<tab>"
-"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger = "<c-f>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
+"let g:UltiSnipsExpandTrigger = "<c-j>"
+"let g:UltiSnipsJumpForwardTrigger = "<c-f>"
+"let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
 
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
@@ -250,6 +254,10 @@ let g:tagbar_type_markdown = {
   \ },
 \ }
 
+" markdwon 的快捷键
+map <silent> <F5> <Plug>MarkdownPreview
+map <silent> <F6> <Plug>StopMarkdownPreview
+
 "nmap <C-s> <Plug>MarkdownPreview
 "nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-s> <Plug>MarkdownPreviewToggle
@@ -291,6 +299,19 @@ autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
 " go end
 
+
+" tab 标签页切换快捷键
+:nn <Leader>1 1gt
+:nn <Leader>2 2gt
+:nn <Leader>3 3gt
+:nn <Leader>4 4gt
+:nn <Leader>5 5gt
+:nn <Leader>6 6gt
+:nn <Leader>7 7gt
+:nn <Leader>8 8gt
+:nn <Leader>9 8gt
+:nn <Leader>0 :tablast<CR>
+
 " mapping
 nmap  -  <Plug>(choosewin)
 " show big letters
@@ -303,6 +324,20 @@ let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#whitespace#enabled = 0
 
 set ttimeoutlen=0
+
+" Echo translation in the cmdline
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+" Display translation in a window
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+" Replace the text with translation
+nmap <silent> <Leader>r <Plug>TranslateR
+vmap <silent> <Leader>r <Plug>TranslateRV
+" Translate the text in clipboard
+nmap <silent> <Leader>x <Plug>TranslateX
+let g:translator_proxy_url = 'socks5://127.0.0.1:1086'
+
 
 colorscheme gruvbox
 "set background=dark
