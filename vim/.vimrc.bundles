@@ -43,8 +43,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 
-" 代码自动完成，安装完插件还需要额外配置才可以使用
+" 代码自动完成，安装完插件还需要额外配置才可以使用 
 Plug 'ycm-core/YouCompleteMe'
+
+" 带AI的自动完成
+"Plug 'tabnine/YouCompleteMe'
 
 " theme
 Plug 'morhetz/gruvbox'
