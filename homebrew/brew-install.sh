@@ -4,6 +4,10 @@
 
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+brew tap shivammathur/php
+brew tap homebrew/cask-versions
+brew tap homebrew/cask-fonts
+
 # essential
 brew install bash-completion
 brew install wget
@@ -67,16 +71,16 @@ brew install caskroom/cask/brew-cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # TODO: add iterm2 settings
-brew cask install iterm2
-brew cask install virtualbox
-
+brew install --cask iterm2
+brew install --cask visual-studio-code
 # browsers
-brew cask install google-chrome
+brew install --cask google-chrome
 
-# text editor
-brew cask install sublime-text3
+brew install --cask go2shell
+brew install --cask hammerspoon
+brew install --cask phantomjs
 
-# brew install iterm2
-# brew install chromedriver
-# brew install sublime-text
-# brew install visual-studio-code
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font
+
+
