@@ -1,18 +1,88 @@
 " 修改leader键
-let mapleader = ','
-let g:mapleader = ','
-" jj 替换 Esc
+"let mapleader = '<space>'
+"let g:mapleader = '<space>'
+
+let mapleader = ' '
+let g:mapleader = ' '
+
+" Move across wrapped lines like regular lines
+" Go to the first non-blank character of a line
+"noremap 0 ^ 
+" Just in case you need to go to the very beginning of a line
+"noremap ^ 0 
+"
+"
+"" jj 替换 Esc
 inoremap jj <Esc>
+
+" clear the highlighted search result
+" (清除高亮)
+nnoremap <Leader>sc :nohlsearch<CR>
+nnoremap <Leader>fs :w<CR>
+" Quit normal mode
+" (保存关闭)
+nnoremap <Leader>q  :q<CR>
+nnoremap <Leader>Q  :qa!<CR>
+" Move half page faster
+" (上下翻页)
+nnoremap <Leader>d  <C-d>
+nnoremap <Leader>u  <C-u>
+
+vmap <Leader>d  <C-d>
+vmap <Leader>u  <C-u>
+
+map <Leader><Leader>l <Plug>(easymotion-lineforward)<CR>
+map <Leader><Leader>h <Plug>(easymotion-linebackward)<CR>
+
+" Move to the start of line
+nnoremap H ^
+vmap H ^
+
+" Move to the end of line
+nnoremap L $
+vmap L $
+
+
+" Redo
+nnoremap U <C-r>
+
+" quit ==> close current window
+nnoremap <Leader>q <C-W>c
+nnoremap <Leader>wq <C-W>c
+" Window operation
+" (关于窗口操作)
+nnoremap <Leader>ww <C-W>w
+nnoremap <Leader>wd <C-W>c
+nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>wk <C-W>k
+nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>ws <C-W>s
+nnoremap <Leader>w- <C-W>s
+nnoremap <Leader>wv <C-W>v
+nnoremap <Leader>w\| <C-W>v
+
+" 多光标"
+map mc <A-n>
+map mx <A-x>
+map mp <A-p>
+
+
+" Tab operation
+" (切换标签)
+"nnoremap tn gt
+"nnoremap tp gT
+
 " 开启语法高亮
 syntax on
 " 检测文件类型
 filetype on
 " 针对不同的文件类型采用不同的缩进格式
-filetype indent on
+" filetype indent on
 " 允许插件
 filetype plugin on
 " 启动自动补全
-filetype plugin indent on
+"filetype plugin indent on
 " 文件修改之后自动载入
 set autoread
 set autoindent
@@ -32,6 +102,7 @@ set showmode
 
 " 显示行号
  set number
+set relativenumber
 " 取消换行
 "set nowrap
 
@@ -67,13 +138,22 @@ set expandtab
 set shiftround
 
 " vim yy to clipboard
-set clipboard=unnamed
+set clipboard+=unnamed,unnamedplus
+"set clipboard=unnamed
+"set clipboard=unnamedplus
 
 " 分屏窗口移动, Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" (关于窗口操作)
+nnoremap <Leader>ww <C-W>w
+nnoremap <Leader>wd <C-W>c
+nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>wk <C-W>k
+nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>ws <C-W>s
+nnoremap <Leader>w- <C-W>s
+nnoremap <Leader>wv <C-W>v
+nnoremap <Leader>w\| <C-W>v
 
 " insert mode move
 inoremap <C-a> <Home>
@@ -95,7 +175,9 @@ vnoremap < <gv
 vnoremap > >gv
 
 " clear search results
-nnoremap <silent> // :noh<CR>
+nnoremap <silent> // :nohlsearch<CR>
+
+"se mouse+=a
 
 " tab navigation mappings
 map tt :tabnew
@@ -103,6 +185,8 @@ map <M-Right> :tabn<CR>
 imap <M-Right> <ESC>:tabn<CR>
 map <M-Left> :tabp<CR>
 imap <M-Left> <ESC>:tabp<CR>
+
+set pastetoggle=<F10>
 
 " install bundles
 if filereadable(expand("~/.vimrc.bundles"))

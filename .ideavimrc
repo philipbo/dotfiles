@@ -1,0 +1,205 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Source your .vimrc
+source ~/.vimrc
+
+let mapleader = ' '
+let g:mapleader = ' '
+
+" https://github.com/JetBrains/ideavim/wiki/set-commands
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=0
+
+" set keymodel=continueselect,stopselect,continuevisual
+set selectmode=mouse,key,ideaselection
+"set selectmode=ideaselection
+set startofline
+"set idearefactormode=keep
+
+set wrapscan
+set showmode
+set showcmd
+
+" Do incremental searching.
+set incsearch
+set ideajoin
+
+"set sneak
+set quickscope
+
+" 输入法自动切换
+"set keep-english-in-normal-and-restore-in-insert
+set keep-english-in-normal
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'tpope/vim-commentary'
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" set selectmode=key
+" set keymodel+=startsel,stopsel,stopselect
+
+
+" 多光标"
+map mc <A-n>
+map mx <A-x>
+map mp <A-p>
+
+
+nmap <S-Left> <Action>(EditorLeftWithSelection)
+nmap <S-Right> <Action>(EditorRightWithSelection)
+nmap <S-Up> <Action>(EditorUpWithSelection)
+nmap <S-Down> <Action>(EditorDownWithSelection)
+imap <S-Left> <Action>(EditorLeftWithSelection)
+imap <S-Right> <Action>(EditorRightWithSelection)
+imap <S-Up> <Action>(EditorUpWithSelection)
+imap <S-Down> <Action>(EditorDownWithSelection)
+vmap <S-Left> <Action>(EditorLeftWithSelection)
+vmap <S-Right> <Action>(ditorRightWithSelection)
+vmap <S-Up> <Action>(EditorUpWithSelection)
+vmap <S-Down> <Action>(EditorDownWithSelection)
+
+map <S-Left> <Action>(EditorLeftWithSelection)
+map <S-Right> <Action>(EditorRightWithSelection)
+map <S-Up> <Action>(EditorUpWithSelection)
+map <S-Down> <Action>(EditorDownWithSelection)
+
+
+" 打开目录树
+nnoremap <leader>ft :NERDTreeToggle<CR>
+
+" idea内置快捷键alt+F1 (使用快捷键 空格+m)
+"nnoremap <Leader>m :action SelectIn<CR>
+" idea内置快捷键control+E (使用快捷键 空格+e)
+nnoremap <Leader>fr :action RecentFiles<CR>
+nnoremap <Leader>fg :action FileStructurePopup<CR>
+"生成get set方法  (使用快捷键 空格+cc)
+nnoremap <Leader>cc :action Generate<CR>
+" ==================================================
+" Show all the provided actions via `:actionlist`
+" ==================================================
+" project search
+"相当于IDEA的两次shift按钮
+"打断点
+"nnoremap <Leader>bb :action ToggleLineBreakpoint<CR>
+"查看所有断点
+"nnoremap <Leader>br :action ViewBreakpoints<CR>
+"DUG启动
+"nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
+
+noremap <Leader>tp :action PreviousTab<CR>
+nnoremap <Leader>tn :action NextTab<CR>
+
+nnoremap <Leader>wr :action MoveEditorToOppositeTabGroup<CR>
+"nnoremap <Leader>e :action EditSourceInNewWindow<CR>
+"nnoremap <Leader>n :action NextWindow<CR>
+nnoremap <Leader>aq :action CloseAllEditors<CR>
+
+"nnoremap <Leader>q :action CloseContent<CR>
+nnoremap <Leader>q :action CloseEditor<CR>
+
+nnoremap <Leader>se :action SearchEverywhere<CR>
+"查找用法
+nnoremap <Leader>fu :action FindUsages<CR>
+"显示用法
+nnoremap <Leader>su :action ShowUsages<CR>
+
+" go to somewhere (g in normal mode for goto somewhere)
+nnoremap <Leader>ga :action GotoAction<CR>
+nnoremap <Leader>gb :action JumpToLastChange<CR>
+nnoremap <Leader>gc :action GotoClass<CR>
+nnoremap <Leader>gf :action GotoFile<CR>
+nnoremap <Leader>gs :action GotoSymbol<CR>
+"nnoremap <Leader>gt :action GotoTest<CR>
+nnoremap <Leader>gd :action GotoDeclaration<CR>
+nnoremap <Leader>gsm :action GotoSuperMethod<CR>
+nnoremap <Leader>gi :action GotoImplementation<CR>
+nnoremap <Leader>fip :action FindInPath<CR>
+nnoremap <Leader>gh :action Back<CR>
+nnoremap <Leader>gl :action Forward<CR>
+nnoremap <Leader>gne :action GotoNextError<CR>
+
+"显示当前文件路径
+nnoremap <Leader>fp :action ShowFilePath<CR>
+"修改所有的关联名字
+nnoremap <Leader>re :action RenameElement<CR>
+"修改当前文件的文件名
+nnoremap <Leader>rf :action RenameFile<CR>
+"关闭活动显示板
+nnoremap <Leader>tc :action CloseActiveTab<CR>
+"以下是不常用
+"打开命令管理器
+nnoremap <Leader>t Vy<CR>:action ActivateTerminalToolWindow<CR>
+vnoremap <Leader>t y<CR>:action ActivateTerminalToolWindow<CR>
+
+"打开文件结构
+nnoremap <Leader>sl Vy<CR>:action ActivateStructureToolWindow<CR>
+vnoremap <Leader>sl y<CR>:action ActivateStructureToolWindow<CR>
+
+" built in search looks better
+" (查找字符串)
+"nnoremap / :action Find<CR>
+" but preserve ideavim search
+" (vim自带的搜索)
+nnoremap <Leader>/ /
+"添加注释
+nnoremap <Leader>;; :action CommentByLineComment<CR>
+"改变视图
+nnoremap <Leader>cv :action ChangeView<CR>
+nnoremap <Leader>ic :action InspectCode<CR>
+nnoremap <Leader>oi :action OptimizeImports<CR>
+nnoremap <Leader>pm :action ShowPopupMenu<CR>
+"正常启动工程
+"nnoremap <Leader>rc :action ChooseRunConfiguration<CR>
+
+nnoremap <Leader>gm :action Git.Menu<CR>
+nnoremap <Leader>fm :action FileMenu<CR>
+nnoremap <leader>sp :action SelectInProjectView<CR>
+
+" 折叠
+"nnoremap zc zC
+"    " 折叠光标下所有代码
+"nnoremap zm zM
+"    " 折叠所有代码，设置 foldlevel=0，设置 foldenable
+"nnoremap zr zR
+    " 打开所有代码，设置 foldlevel 为最大值
+
+"nnoremap <leader>nc :action NewClass<CR>
+nnoremap <leader>np :action NewProject<CR>
+"nnoremap <leader>nm :action NewModule<CR>
+nnoremap <leader>nf :action NewFile<CR>
+nnoremap <leader>ng :action Go.NewGoFile<CR>
+
+nmap == :action ReformatCode<cr>
+
+map <Leader><Leader>l <Plug>(easymotion-lineforward)<CR>
+map <Leader><Leader>h <Plug>(easymotion-linebackward)<CR>
+
+map gs <Plug>(easymotion-prefix)
