@@ -59,11 +59,8 @@ This function should only modify configuration layer settings."
      lsp
      (markdown :variables markdown-live-preview-engine 'vmd)
      pandoc
-     ;;multiple-cursors
+     multiple-cursors
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      
      (shell :variables
         shell-default-shell 'vterm
@@ -701,6 +698,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  (display-time-mode t)
   (setq evil-escape-key-sequence "jj") ;; 默认值为 fd
   (setq evil-escape-delay 0.2) ;; 默认为 0.1，单位为秒
 
@@ -722,10 +720,10 @@ before packages are loaded."
   (setq copilot-indent-warning-suppress t)
 
 ;; org setting
-;;  (with-eval-after-load 'org
-;;    (setq org-directory "~/Documents/org/"))
+  (with-eval-after-load 'org
+    (setq org-directory "~/Documents/org/"))
 
-  (setq org-directory "~/Documents/org/")
+  ;;(setq org-directory "~/Documents/org/")
   (setq org-adapt-indentation t)
   (setq org-todo-keywords
     '((sequence "TODO(t)" "WAITING(w)" "PROGRESS(p)" "FIXME(fx)" "NOTE(n)" "TEMP(t)"  "|" "DONE(d)" "CANCELLED(c)" "FAIL(f)" )))
